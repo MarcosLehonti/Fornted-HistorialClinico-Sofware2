@@ -1,0 +1,52 @@
+<!-- src/app/components/asignar-horario/asignar-horario.component.html -->
+
+<div class="asignar-horario-container">
+    <h2>Asignar Horario a Médico</h2>
+    
+    <div class="form-group">
+      <label for="medico">Selecciona un Médico:</label>
+      <select [(ngModel)]="medicoSeleccionado" id="medico">
+        <option *ngFor="let medico of medicos" [value]="medico.id">
+          {{ medico.username }}
+        </option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="horario">Selecciona un Horario:</label>
+      <select [(ngModel)]="horarioSeleccionado" id="horario">
+        <option *ngFor="let horario of horarios" [value]="horario.id">
+          Día: {{ horario.dia }}, Inicio: {{ horario.horaInicio }}, Fin: {{ horario.horaFin }}
+        </option>
+      </select>
+    </div>
+  
+    <button (click)="asignarHorario()">Asignar Horario</button>
+
+    <!-- Nueva sección para mostrar los detalles de cada médico -->
+    <div class="medico-detalles-list">
+      <h3>Detalles de Médicos</h3>
+
+      <div *ngFor="let medico of medicosConDetalles" class="medico-detalle-card">
+        <h4>{{ medico.username }} ({{ medico.email }})</h4>
+        <p><strong>Especialidades:</strong> {{ medico.especialidadesNombres }}</p>
+        <p><strong>Horarios Asignados:</strong></p>
+        <table>
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>Hora Inicio</th>
+              <th>Hora Fin</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let horario of medico.horarios">
+              <td>{{ horario.dia }}</td>
+              <td>{{ horario.horaInicio }}</td>
+              <td>{{ horario.horaFin }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+/* Aplica la fuente Roboto a todo el contenedor de registro */
+.register-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #e0e7ef; /* Color suave para el borde */
+  border-radius: 8px;
+  background-color: #ffffff; /* Fondo blanco para contraste */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333; /* Texto oscuro suave */
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #555; /* Color de texto más suave */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #007bff; /* Azul suave en enfoque */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2); /* Sombra azul claro en enfoque */
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Azul más oscuro en hover */
+}
+
+.mensaje-exito {
+  color: #28a745; /* Verde para éxito */
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.mensaje-error {
+  color: #dc3545; /* Rojo para error */
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .register-container {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  input,
+  select {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.65rem;
+    font-size: 0.9rem;
+  }
+}

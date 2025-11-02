@@ -1,0 +1,38 @@
+<app-menu></app-menu>
+<div class="especialidades-container">
+  <div class="especialidad-card" *ngFor="let especialidad of especialidades">
+    <h3>{{ especialidad.nombre }}</h3>
+    <button (click)="cargarUsuariosPorEspecialidad(especialidad.id)">Ver Medicos</button>
+  </div>
+</div>
+
+<div *ngIf="selectedEspecialidadId !== null" class="usuarios-container">
+  <h2>Usuarios de la Especialidad Seleccionada</h2>
+  <table *ngIf="usuarios.length > 0; else noUsuarios">
+    <thead>
+      <tr>
+        <th>Medico</th>
+        <th>Turno</th>
+        <th>Horario</th>
+        <th>Día</th>
+        <th>Fecha</th>
+        <th>Disponibilidad</th>
+        <th>Acción</th> <!-- Columna para el botón -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuarios">
+        <td>{{ usuario.usuario }}</td>
+        <td>{{ usuario.turno }}</td>
+        <td>{{ usuario.horario }}</td>
+        <td>{{ usuario.dia }}</td>
+        <td>{{ usuario.fecha }}</td> <!-- Mostrar la fecha tal como viene de la API -->
+        <td>{{ usuario.disponibilidad ? 'Disponible' : 'No Disponible' }}</td>
+        <td><button (click)="seleccionarFicha(usuario)">Seleccionar Ficha</button></td> <!-- Botón -->
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noUsuarios>
+    <p>No hay usuarios para esta especialidad.</p>
+  </ng-template>
+</div>

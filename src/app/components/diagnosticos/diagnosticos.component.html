@@ -1,0 +1,41 @@
+<app-menu></app-menu>
+
+<div class="diagnosticos-container">
+    <h2>Diagnósticos</h2>
+  
+    <!-- Condición para verificar si hay al menos un diagnóstico -->
+    <ng-container *ngIf="diagnosticosMedico.length > 0 || diagnosticosPaciente.length > 0; else sinDiagnosticos">
+      
+      <!-- Diagnósticos realizados por el médico -->
+      <section *ngIf="diagnosticosMedico.length > 0">
+        <h3>Diagnósticos Realizados</h3>
+        <div *ngFor="let diagnostico of diagnosticosMedico" class="diagnostico-card">
+          <h4>Paciente: {{ diagnostico.nombrePaciente }}</h4>
+          <p><strong>Fecha:</strong> {{ diagnostico.fecha }}</p>
+          <p><strong>Especialidad:</strong> {{ diagnostico.especialidad }}</p>
+          <p><strong>Descripción:</strong> {{ diagnostico.descripcion }}</p>
+          <p><strong>Tratamiento:</strong> {{ diagnostico.tratamiento }}</p>
+
+        </div>
+      </section>
+  
+      <!-- Diagnósticos recibidos por el paciente -->
+      <section *ngIf="diagnosticosPaciente.length > 0">
+        <h3>Mis Diagnósticos</h3>
+        <div *ngFor="let diagnostico of diagnosticosPaciente" class="diagnostico-card">
+          <h4>Médico: {{ diagnostico.nombreMedico }}</h4>
+          <p><strong>Fecha:</strong> {{ diagnostico.fecha }}</p>
+          <p><strong>Especialidad:</strong> {{ diagnostico.especialidad }}</p>
+          <p><strong>Descripción:</strong> {{ diagnostico.descripcion }}</p>
+          <p><strong>Tratamiento:</strong> {{ diagnostico.tratamiento }}</p>
+
+        </div>
+      </section>
+    </ng-container>
+  
+    <!-- Mensaje cuando no hay diagnósticos disponibles en ambas secciones -->
+    <ng-template #sinDiagnosticos>
+      <p class="no-diagnosticos">No hay diagnósticos disponibles.</p>
+    </ng-template>
+  </div>
+  

@@ -1,0 +1,29 @@
+{
+  "routes": [
+    "/asignar",
+    "/asignar-horario",
+    "/bienvenida",
+    "/bitacora",
+    "/citasmedico",
+    "/citasusuario",
+    "/crear-horario",
+    "/crearantecedente",
+    "/creardiagnostico",
+    "/creartriaje",
+    "/especialidades",
+    "/especialidades-horarios",
+    "/login",
+    "/medicos",
+    "/menu",
+    "/perfil",
+    "/registro",
+    "/usuarios",
+    "/verantecedentes",
+    "/verespecialidad",
+    "/verhistoriasclinicas",
+    "/vermihistorialclinico",
+    "/vermisdiagnosticos",
+    "/vermitriaje",
+    "/vertriajes"
+  ]
+}

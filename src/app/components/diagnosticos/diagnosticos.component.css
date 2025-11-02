@@ -1,0 +1,45 @@
+.diagnosticos-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .diagnostico-card {
+    background-color: #e0f7fa;
+    border: 1px solid #b2ebf2;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    color: #00796b;
+    margin-bottom: 1rem;
+  }
+  
+  h4 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    margin: 0.3rem 0;
+  }
+  
+  strong {
+    color: #004d40;
+  }
+  
+  .no-diagnosticos {
+    text-align: center;
+    color: #757575;
+    font-style: italic;
+    margin-top: 2rem;
+  }
+  

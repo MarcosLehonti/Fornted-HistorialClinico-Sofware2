@@ -1,0 +1,65 @@
+<app-menu></app-menu>
+<div class="especialidades-container">
+  <h2>Especialidades</h2>
+  <div class="especialidades-grid">
+    <!-- Tarjetas de especialidades -->
+    <div class="especialidad-card" *ngFor="let especialidad of especialidades">
+      <h3>{{ especialidad.nombre }}</h3>
+      <button (click)="seleccionarEspecialidad(especialidad.id)" class="asignar-horario-button">
+         Asignar Horario
+      </button>
+
+      <!-- Botón para ver médicos -->
+      <button (click)="mostrarMedicos(especialidad.id)" class="ver-horarios-button">
+        Ver Médicos
+      </button>
+    </div>
+  </div>
+
+  <!-- Selector de horarios y botón de asignación para la especialidad seleccionada -->
+  <div *ngIf="especialidadSeleccionadaId" class="asignar-horario-container">
+    <h3>Asignar Horario a la Especialidad Seleccionada</h3>
+    <label for="horario">Horario:</label>
+    <select [(ngModel)]="horarioSeleccionadoId">
+      <option *ngFor="let horario of horarios" [value]="horario.id">
+        {{ horario.dia }}: {{ horario.horaInicio }} - {{ horario.horaFin }}
+      </option>
+    </select>
+    <button (click)="asignarHorario()" class="asignar-horario-button">
+      Asignar Horario
+    </button>
+  </div>
+
+  <!-- Tabla de horarios por especialidad, solo con columnas para cada día -->
+  <div *ngFor="let especialidad of especialidades" class="tabla-horarios-container">
+    <h3>Horarios para {{ especialidad.nombre }}</h3>
+    <table class="tabla-horarios">
+      <thead>
+        <tr>
+          <th *ngFor="let dia of diasSemana">{{ dia }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- Mostrar horarios en cada columna según el día -->
+          <td *ngFor="let dia of diasSemana">
+            <div *ngFor="let horario of (horariosAsignados[especialidad.id]?.[convertirDiaAEspanolADiaIngles(dia)] || [])">
+              {{ horario.horaInicio }} - {{ horario.horaFin }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mostrar los médicos solo si hay médicos disponibles -->
+  <div *ngIf="medicos.length > 0" class="medicos-container">
+    <h2>Médicos de la especialidad seleccionada</h2>
+    <div *ngFor="let medico of medicos" class="medico-card">
+      <p>{{ medico.username }} - {{ medico.email }}</p>
+      <button (click)="seleccionarFicha(especialidadSeleccionadaId, medico.id)" class="seleccionar-ficha-button">
+        Seleccionar Ficha
+      </button>
+    </div>
+  </div>
+</div>

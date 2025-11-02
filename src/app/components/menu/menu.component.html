@@ -1,0 +1,38 @@
+<!-- src/app/components/menu/menu.component.html -->
+<nav>
+  <ul>
+    <li><a routerLink="/perfil"><span class="material-icons">person</span> Perfil</a></li>
+    <li><a routerLink="/citasusuario"><span class="material-icons">event</span> Citas</a></li>
+    <li><a routerLink="/verespecialidad"><span class="material-icons">local_hospital</span> Especialidades</a></li>
+
+    <!-- Mostrar el menú Recursos solo si el usuario tiene un rol autorizado -->
+    <li *ngIf="canAccessRecursos()" class="dropdown">
+      <a href="#" class="dropdown-toggle"><span class="material-icons">folder_open</span> Recursos</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/usuarios"><span class="material-icons">group</span> Usuarios</a></li>
+        <li><a routerLink="/medicos"><span class="material-icons">medical_services</span> Médicos</a></li>
+        <li><a routerLink="/crear-horario"><span class="material-icons">schedule</span> Horarios</a></li>
+        <li><a routerLink="/asignar"><span class="material-icons">assignment</span> Asignar Horarios</a></li>
+        <li><a routerLink="/citasmedico"><span class="material-icons">calendar_today</span> Ver Citas</a></li>
+        <li><a routerLink="/vertriajes"><span class="material-icons">health_and_safety</span> Ver Todos los Triajes</a></li>
+        <li><a routerLink="/creartriaje"><span class="material-icons">note_add</span> Crear Nuevo Triaje</a></li>
+        <li><a routerLink="/crearantecedente"><span class="material-icons">history_edu</span> Crear Nuevo Antecedente</a></li>
+        <li><a routerLink="/creardiagnostico"><span class="material-icons">healing</span> Crear Nuevo Diagnóstico</a></li>
+        <li><a routerLink="/verhistoriasclinicas"><span class="material-icons">book</span> Ver Historias Clínicas</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle"><span class="material-icons">history</span> Historial Clínico</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/vermitriaje"><span class="material-icons">local_hospital</span> Ver Triajes</a></li>
+        <li><a routerLink="/verantecedentes"><span class="material-icons">description</span> Ver Antecedentes</a></li>
+        <li><a routerLink="/vermisdiagnosticos"><span class="material-icons">assignment</span> Ver Diagnóstico</a></li>
+        <li><a routerLink="/vermihistorialclinico"><span class="material-icons">medical_services</span> Ver mi Historial Completo</a></li>
+      </ul>
+    </li>
+
+    <li><a (click)="logout()"><span class="material-icons">exit_to_app</span> Cerrar Sesión</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>

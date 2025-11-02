@@ -1,0 +1,38 @@
+.citas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.citas-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cita-card {
+    background-color: #d4edda; /* Verde claro */
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    width: 100%; /* Para que el ancho se adapte al contenido */
+    margin-bottom: 1rem; /* Separación entre tarjetas */
+}
+
+.cita-card h3 {
+    margin-top: 0;
+    color: #155724;
+}
+
+.cita-card p {
+    margin: 0.5rem 0;
+    color: #155724;
+}
+
+.no-citas {
+    color: #6c757d;
+}

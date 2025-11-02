@@ -1,0 +1,62 @@
+<app-menu></app-menu>
+
+<div class="paciente-detalle-container card">
+    <h2>Mi Historial Clínico</h2>
+    
+    <!-- Triajes -->
+    <div *ngIf="triajes.length > 0" class="section">
+      <h3>Triajes</h3>
+      <div *ngFor="let triaje of triajes" class="card-item">
+        <p><strong>Fecha:</strong> {{ triaje.fecha }}</p>
+        <p><strong>Hora:</strong> {{ triaje.hora }}</p>
+        <p><strong>Temperatura:</strong> {{ triaje.temperatura }} °C</p>
+        <p><strong>Frecuencia Cardiaca:</strong> {{ triaje.frecuenciaCardiaca }} bpm</p>
+        <p><strong>Frecuencia Respiratoria:</strong> {{ triaje.frecuenciaRespiratoria }} rpm</p>
+        <p><strong>Saturación de Oxígeno:</strong> {{ triaje.saturacionOxigeno }} %</p>
+        <p><strong>Peso:</strong> {{ triaje.peso }} kg</p>
+        <p><strong>Estatura:</strong> {{ triaje.estatura }} cm</p>
+        <p><strong>Alergias:</strong> {{ triaje.alergias || 'Ninguna' }}</p>
+        <p><strong>Enfermedades Crónicas:</strong> {{ triaje.enfermedadesCronicas || 'Ninguna' }}</p>
+        <p><strong>Motivo de Consulta:</strong> {{ triaje.motivoConsulta }}</p>
+        <p><strong>Enfermera:</strong> {{ triaje.nombreEnfermera }}</p>
+      </div>
+    </div>
+    <div *ngIf="triajes.length === 0">
+      <p>No hay triajes disponibles para este paciente.</p>
+    </div>
+  
+    <!-- Antecedentes -->
+    <div *ngIf="antecedentes.length > 0" class="section">
+      <h3>Antecedentes</h3>
+      <div *ngFor="let antecedente of antecedentes" class="card-item">
+        <p><strong>Fecha:</strong> {{ antecedente.fecha }}</p>
+        <p><strong>Descripción:</strong> {{ antecedente.descripcion }}</p>
+        <p><strong>Especialidad:</strong> {{ antecedente.especialidad.nombre }}</p>
+      </div>
+    </div>
+    <div *ngIf="antecedentes.length === 0">
+      <p>No hay antecedentes disponibles para este paciente.</p>
+    </div>
+  
+    <!-- Diagnósticos -->
+    <div *ngIf="diagnosticos.length > 0" class="section">
+      <h3>Diagnósticos</h3>
+      <div *ngFor="let diagnostico of diagnosticos" class="card-item">
+        <p><strong>Fecha:</strong> {{ diagnostico.fecha }}</p>
+        <p><strong>Descripción:</strong> {{ diagnostico.descripcion }}</p>
+        <p><strong>Especialidad:</strong> {{ diagnostico.especialidad }}</p>
+        <p><strong>Tratamiento:</strong> {{ diagnostico.tratamiento }}</p>
+
+      </div>
+    </div>
+    <div *ngIf="diagnosticos.length === 0">
+      <p>No hay diagnósticos disponibles para este paciente.</p>
+    </div>
+  
+    <!-- Mensaje general si no hay información -->
+    <div *ngIf="triajes.length === 0 && antecedentes.length === 0 && diagnosticos.length === 0">
+      <p>No hay información de triajes, antecedentes o diagnósticos disponible para este paciente.</p>
+    </div>
+
+    <button class="btn-imprimir" (click)="imprimirPDF()">Imprimir PDF</button>
+  </div>

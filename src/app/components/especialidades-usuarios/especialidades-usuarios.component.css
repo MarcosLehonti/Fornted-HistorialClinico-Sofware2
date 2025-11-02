@@ -1,0 +1,88 @@
+/* Contenedor de tarjetas de especialidades */
+.especialidades-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem auto;
+    max-width: 800px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos de la tarjeta de especialidad */
+.especialidad-card {
+    background-color: #d4edda; /* Verde claro */
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.especialidad-card h3 {
+    color: #155724; /* Texto verde oscuro */
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.especialidad-card button {
+    padding: 0.5rem 1rem;
+    background-color: #155724; /* Verde oscuro */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.especialidad-card button:hover {
+    background-color: #0c3e16; /* Verde aún más oscuro al pasar el mouse */
+}
+
+/* Contenedor de la tabla de usuarios */
+.usuarios-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    background-color: #f1f8f5; /* Fondo verde claro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+thead th {
+    background-color: #155724; /* Verde oscuro */
+    color: white;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: bold;
+    border: 1px solid #c3e6cb;
+}
+
+tbody td {
+    padding: 0.75rem;
+    border: 1px solid #c3e6cb;
+    color: #155724; /* Texto verde oscuro */
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #d4edda; /* Verde claro para filas pares */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #f1f8f5; /* Verde aún más claro para filas impares */
+}

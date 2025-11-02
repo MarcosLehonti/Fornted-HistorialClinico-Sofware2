@@ -1,0 +1,29 @@
+<app-menu></app-menu>
+<div *ngIf="errorMessage">
+    <p class="error-message">{{ errorMessage }}</p>
+  </div>
+  
+  <div *ngIf="!errorMessage">
+    <h2>Registro de Bitácora</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Acción</th>
+          <th>Detalles</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of bitacora">
+          <td>{{ entry.id }}</td>
+          <td>{{ entry.usuario }}</td>
+          <td>{{ entry.accion }}</td>
+          <td>{{ entry.detalles }}</td>
+          <td>{{ entry.fecha }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

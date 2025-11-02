@@ -1,0 +1,86 @@
+/* Estilo general para las tarjetas */
+.card {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  opacity: 0; /* Oculto al inicio para la animación */
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Tarjetas que aparecen al hacer scroll */
+.animate-slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tarjeta de bienvenida */
+.card h1, .card h2 {
+  color: #007bff;
+  font-size: 24px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.card p, .card li {
+  color: #333;
+  font-size: 16px;
+}
+
+/* Contenedor para las tarjetas de triajes y solicitud de cita */
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* Estilos específicos para las tarjetas en los recuadros */
+.card-info, .card-appointment {
+  flex: 1;
+  max-width: 500px;
+}
+
+.card-info h2, .card-appointment h2 {
+  font-size: 20px;
+  color: #007bff;
+  text-align: center;
+}
+
+/* Iconos dentro de títulos */
+.card h1 i, .card h2 i {
+  color: #28a745;
+  margin-right: 8px;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  .card-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-info, .card-appointment {
+    max-width: 100%;
+  }
+}
+/* Agregar animación para las tarjetas cuando aparecen en pantalla */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}

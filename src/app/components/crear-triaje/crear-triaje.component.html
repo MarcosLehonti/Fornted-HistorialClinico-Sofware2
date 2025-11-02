@@ -1,0 +1,91 @@
+<!-- src/app/components/crear-triaje/crear-triaje.component.html -->
+<app-menu></app-menu>
+<div class="triaje-container">
+    <h2 class="title">Crear Triaje</h2>
+  
+    <!-- Tabla de usuarios -->
+    <div class="user-table-container">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="seleccionarPaciente(usuario)">Crear Triaje</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Formulario de triaje -->
+    <form *ngIf="pacienteSeleccionado" class="triaje-form" (ngSubmit)="guardarTriaje()">
+      <h3 class="form-title">Paciente Seleccionado: {{ pacienteSeleccionado.username }} - {{ pacienteSeleccionado.email }}</h3>
+  
+      <div class="form-group">
+        <label for="temperatura">Temperatura:</label>
+        <input type="number" id="temperatura" [(ngModel)]="temperatura" name="temperatura" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" [(ngModel)]="fecha" name="fecha" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="hora">Hora:</label>
+        <input type="time" id="hora" [(ngModel)]="hora" name="hora" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="frecuenciaCardiaca">Frecuencia Cardiaca:</label>
+        <input type="number" id="frecuenciaCardiaca" [(ngModel)]="frecuenciaCardiaca" name="frecuenciaCardiaca" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="frecuenciaRespiratoria">Frecuencia Respiratoria:</label>
+        <input type="number" id="frecuenciaRespiratoria" [(ngModel)]="frecuenciaRespiratoria" name="frecuenciaRespiratoria" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="saturacionOxigeno">Saturación de Oxígeno:</label>
+        <input type="number" id="saturacionOxigeno" [(ngModel)]="saturacionOxigeno" name="saturacionOxigeno" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="peso">Peso (kg):</label>
+        <input type="number" id="peso" [(ngModel)]="peso" name="peso" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="estatura">Estatura (cm):</label>
+        <input type="number" id="estatura" [(ngModel)]="estatura" name="estatura" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="alergias">Alergias:</label>
+        <textarea id="alergias" [(ngModel)]="alergias" name="alergias"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="enfermedadesCronicas">Enfermedades Crónicas:</label>
+        <textarea id="enfermedadesCronicas" [(ngModel)]="enfermedadesCronicas" name="enfermedadesCronicas"></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="motivoConsulta">Motivo de Consulta:</label>
+        <textarea id="motivoConsulta" [(ngModel)]="motivoConsulta" name="motivoConsulta" required></textarea>
+      </div>
+  
+      <!-- Botón para guardar triaje -->
+      <button type="submit" class="btn btn-save">Guardar Triaje</button>
+    </form>
+  </div>
+  

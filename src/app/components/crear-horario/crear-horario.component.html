@@ -1,0 +1,24 @@
+<!-- src/app/components/horario-table/horario-table.component.html -->
+<app-menu></app-menu>
+<div class="container">
+  <h2>Horarios</h2>
+  <table *ngIf="horarios.length > 0; else noData" class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Hora</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let horario of horarios">
+        <td>{{ horario.id }}</td>
+        <td>{{ horario.timeSlot }}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noData>
+    <p class="no-data">No hay horarios disponibles.</p>
+  </ng-template>
+</div>

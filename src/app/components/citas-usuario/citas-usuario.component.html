@@ -1,0 +1,20 @@
+<app-menu></app-menu>
+<div class="citas-container">
+  <h2>Citas del Usuario</h2>
+
+  <div *ngIf="citas.length > 0; else noCitas" class="citas-list">
+    <div *ngFor="let cita of citas" class="cita-card">
+      <h3>Horario: {{ cita.horario }}</h3>
+      <p><strong>Nombre del Paciente:</strong> {{ cita.nombreUsuarioLogeado }}</p>
+      <p><strong>Fecha:</strong> {{ fechaActual }}</p> <!-- Mostrar la fecha actual en cada tarjeta -->
+      <p><strong>Día:</strong> {{ cita.dia }}</p>
+      <p><strong>Especialidad:</strong> {{ cita.especialidad }}</p>
+      <p><strong>Turno:</strong> {{ cita.turno }}</p>
+      <p><strong>Ubicación:</strong> {{ obtenerUbicacion(cita.especialidad) }}</p> <!-- Mostrar ubicación según especialidad -->
+    </div>
+  </div>
+
+  <ng-template #noCitas>
+    <p>No se encontraron citas para el usuario logueado.</p>
+  </ng-template>
+</div>

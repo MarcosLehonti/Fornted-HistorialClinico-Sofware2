@@ -1,0 +1,37 @@
+<!-- src/app/usuarios/user-list.component.html -->
+<app-menu></app-menu>
+<div class="user-list">
+    <h2>Lista de Usuarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de Usuario</th>
+          <th>Roles</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.id }}</td>
+          <td>{{ usuario.username }}</td>
+          <td>
+            <span *ngFor="let rol of usuario.roles">{{ rol.nombre }} </span>
+          </td>
+          <td>
+            <button (click)="seleccionarUsuario(usuario)">Asignar Rol</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div *ngIf="selectedUser" class="assign-role-form">
+      <h3>Asignar Rol a {{ selectedUser.username }}</h3>
+      <select [(ngModel)]="selectedRole">
+        <option *ngFor="let rol of roles" [value]="rol.nombre">{{ rol.nombre }}</option>
+      </select>
+      <button (click)="asignarRol()">Asignar Rol</button>
+      <button (click)="selectedUser = null">Cancelar</button>
+    </div>
+  </div>
+  

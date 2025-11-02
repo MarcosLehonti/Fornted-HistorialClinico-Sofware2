@@ -1,0 +1,55 @@
+<app-menu></app-menu>
+
+<div class="diagnostico-container">
+    <h2>Crear Diagnóstico</h2>
+  
+    <!-- Tabla de usuarios para seleccionar el paciente -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios">
+          <td>{{ usuario.username }}</td>
+          <td>{{ usuario.email }}</td>
+          <td>
+            <button (click)="seleccionarPaciente(usuario)">Seleccionar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Formulario de diagnóstico -->
+    <form *ngIf="pacienteSeleccionado" (ngSubmit)="guardarDiagnostico()">
+      <h3>Paciente Seleccionado: {{ pacienteSeleccionado.username }} - {{ pacienteSeleccionado.email }}</h3>
+  
+      <div class="form-group">
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" required></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha" [(ngModel)]="fecha" name="fecha" required />
+      </div>
+
+      <div class="form-group">
+        <label for="tratamiento">Tratamiento:</label>
+        <textarea id="tratamiento" [(ngModel)]="tratamiento" name="tratamiento" required></textarea>
+      </div>
+
+    
+      <div class="form-group">
+        <label for="especialidadId">ID de Especialidad:</label>
+        <input type="number" id="especialidadId" [(ngModel)]="especialidadId" name="especialidadId" required />
+      </div>
+  
+      <!-- Botón para guardar diagnóstico -->
+      <button type="submit">Guardar Diagnóstico</button>
+    </form>
+  </div>
+  

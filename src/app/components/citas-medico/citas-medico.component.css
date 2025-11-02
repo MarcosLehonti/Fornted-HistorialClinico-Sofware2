@@ -1,0 +1,29 @@
+/* src/app/components/citas-medico/citas-medico.component.css */
+.citas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .cita-card {
+    background-color: #d4edda; /* Verde claro */
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-bottom: 1rem;
+  }
+  
+  .cita-card h3 {
+    margin-top: 0;
+    color: #155724;
+  }
+  
+  .cita-card p {
+    margin: 0.5rem 0;
+    color: #155724;
+  }
+  

@@ -1,0 +1,43 @@
+.paciente-detalle-container {
+  max-width: 800px;
+  margin: 20px auto; /* Agregamos un margen superior de 20px */
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+.section {
+  margin-top: 20px;
+}
+
+h3 {
+  color: #00796b;
+  margin-top: 0;
+}
+
+.card-item {
+  background-color: #f1f9ff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+p {
+  margin: 5px 0;
+  color: #555;
+}
+
+@media print {
+  .btn-imprimir {
+    display: none;
+  }
+}

@@ -1,0 +1,26 @@
+
+<app-menu></app-menu>
+
+<div class="triajes-container">
+    <h2>Triajes del Paciente</h2>
+  
+    <div *ngIf="triajes.length === 0">No hay triajes disponibles para este paciente.</div>
+  
+    <div *ngFor="let triaje of triajes" class="triaje-card">
+      <h3>Triaje ID: {{ triaje.id }}</h3>
+      <p><strong>Paciente:</strong> {{ triaje.nombrePaciente }}</p>
+      <p><strong>Enfermera:</strong> {{ triaje.nombreEnfermera }}</p>
+      <p><strong>Fecha:</strong> {{ triaje.fecha }}</p>
+      <p><strong>Hora:</strong> {{ triaje.hora }}</p>
+      <p><strong>Temperatura:</strong> {{ triaje.temperatura }}°C</p>
+      <p><strong>Frecuencia Cardiaca:</strong> {{ triaje.frecuenciaCardiaca }} BPM</p>
+      <p><strong>Frecuencia Respiratoria:</strong> {{ triaje.frecuenciaRespiratoria }} RPM</p>
+      <p><strong>Saturación de Oxígeno:</strong> {{ triaje.saturacionOxigeno }}%</p>
+      <p><strong>Peso:</strong> {{ triaje.peso }} kg</p>
+      <p><strong>Estatura:</strong> {{ triaje.estatura }} cm</p>
+      <p><strong>Alergias:</strong> {{ triaje.alergias || 'No especificado' }}</p>
+      <p><strong>Enfermedades Crónicas:</strong> {{ triaje.enfermedadesCronicas || 'No especificado' }}</p>
+      <p><strong>Motivo de Consulta:</strong> {{ triaje.motivoConsulta }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,88 @@
+<div class="historial-card">
+   
+    <h3>Historial Clínico del Paciente</h3>
+  
+    <!-- Triajes -->
+    <div class="historial-section">
+      <h3>Triajes</h3>
+      <table class="historial-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Temperatura</th>
+            <th>Frecuencia Cardiaca</th>
+            <th>Frecuencia Respiratoria</th>
+            <th>Saturación de Oxígeno</th>
+            <th>Peso</th>
+            <th>Estatura</th>
+            <th>Alergias</th>
+            <th>Enfermedades Crónicas</th>
+            <th>Motivo de Consulta</th>
+            <th>Enfermera</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let triaje of triajes">
+            <td>{{ triaje.fecha }}</td>
+            <td>{{ triaje.hora }}</td>
+            <td>{{ triaje.temperatura }} °C</td>
+            <td>{{ triaje.frecuenciaCardiaca }} bpm</td>
+            <td>{{ triaje.frecuenciaRespiratoria }} rpm</td>
+            <td>{{ triaje.saturacionOxigeno }} %</td>
+            <td>{{ triaje.peso }} kg</td>
+            <td>{{ triaje.estatura }} cm</td>
+            <td>{{ triaje.alergias || 'Ninguna' }}</td>
+            <td>{{ triaje.enfermedadesCronicas || 'Ninguna' }}</td>
+            <td>{{ triaje.motivoConsulta }}</td>
+            <td>{{ triaje.nombreEnfermera }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Antecedentes -->
+    <div class="historial-section">
+      <h3>Antecedentes</h3>
+      <table class="historial-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Especialidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let antecedente of antecedentes">
+            <td>{{ antecedente.fecha }}</td>
+            <td>{{ antecedente.descripcion }}</td>
+            <td>{{ antecedente.especialidad.nombre }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Diagnósticos -->
+    <div class="historial-section">
+      <h3>Diagnósticos</h3>
+      <table class="historial-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Descripción</th>
+            <th>Especialidad</th>
+            <th>Tratamiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let diagnostico of diagnosticos">
+            <td>{{ diagnostico.fecha }}</td>
+            <td>{{ diagnostico.descripcion }}</td>
+            <td>{{ diagnostico.especialidad }}</td>
+            <td>{{ diagnostico.tratamiento }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

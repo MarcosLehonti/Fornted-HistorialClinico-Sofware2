@@ -1,0 +1,39 @@
+<app-menu></app-menu>
+<div class="label-container">
+    <h1>Seleccionar Horarios</h1>
+    <div *ngFor="let especialidad of especialidades">
+        <h2>{{ especialidad.nombre }}</h2>
+        <div *ngFor="let horario of horariosPorEspecialidad[especialidad.id]">
+            <label>
+                <input type="checkbox" 
+                       [value]="horario.id" 
+                       (change)="seleccionarHorario(especialidad.id, horario.id)" /> 
+                {{ horario.dia }} de {{ horario.horaInicio }} a {{ horario.horaFin }}
+            </label>
+        </div>
+    </div>
+    <button (click)="guardarHorariosSeleccionados()">Guardar Horarios Seleccionados</button>
+    
+    <!-- Tabla para mostrar los horarios asignados -->
+    <h2>Horarios Asignados</h2>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Especialidad</th> <!-- Nueva columna para la especialidad -->
+                    <th>Día</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let horario of horariosAsignados">
+                    <td>{{ obtenerNombreEspecialidad(horario.especialidadId) }}</td> <!-- Mostrar nombre de la especialidad -->
+                    <td>{{ horario.dia }}</td>
+                    <td>{{ horario.horaInicio }}</td>
+                    <td>{{ horario.horaFin }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

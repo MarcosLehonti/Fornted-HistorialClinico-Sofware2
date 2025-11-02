@@ -1,0 +1,20 @@
+<!-- src/app/components/citas-medico/citas-medico.component.html -->
+<app-menu></app-menu>
+<div class="citas-container">
+  <h2>Citas Asignadas al Médico</h2>
+
+  <div *ngIf="citas.length > 0; else noCitas">
+    <div *ngFor="let cita of citas" class="cita-card">
+      <h3>Horario: {{ cita.horario }}</h3>
+      <p><strong>Paciente:</strong> {{ cita.nombreUsuarioLogeado }}</p>
+      <p><strong>Fecha:</strong> {{ cita.fecha }}</p>
+      <p><strong>Día:</strong> {{ cita.dia }}</p>
+      <p><strong>Especialidad:</strong> {{ cita.especialidad }}</p>
+      <p><strong>Turno:</strong> {{ cita.turno }}</p>
+    </div>
+  </div>
+
+  <ng-template #noCitas>
+    <p>No hay citas asignadas para este médico.</p>
+  </ng-template>
+</div>

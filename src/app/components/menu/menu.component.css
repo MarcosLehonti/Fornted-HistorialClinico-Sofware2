@@ -1,0 +1,145 @@
+/* src/app/components/menu/menu.component.css */
+
+nav {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f4f8;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+nav li {
+  position: relative;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+nav a:hover {
+  background-color: #e0e7ef;
+  color: #007bff;
+}
+
+.logout-button {
+  background-color: #007bff;
+  color: white;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
+/* Estilos para el submenú desplegable */
+.dropdown-menu {
+  display: none; /* Oculta el submenú por defecto */
+  position: absolute;
+  top: 100%; /* Coloca el submenú directamente debajo del elemento padre */
+  left: 0; /* Alinea el submenú con el borde izquierdo del elemento padre */
+  background-color: #f0f4f8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 0;
+  border-radius: 4px;
+  z-index: 1;
+  min-width: 120px; /* Ajusta el ancho mínimo para el submenú */
+  opacity: 0; /* Inicialmente invisible */
+  transition: opacity 0.3s ease; /* Transición para una apariencia suave */
+  visibility: hidden; /* Oculto cuando no está activo */
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block; /* Muestra el submenú al pasar el cursor sobre "Recursos" */
+  opacity: 1; /* Totalmente visible */
+  visibility: visible; /* Hace visible el elemento */
+}
+
+.dropdown-menu li {
+  width: 100%;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.5rem 1.5rem;
+  color: #333;
+  text-align: left;
+  white-space: nowrap; /* Evita el salto de línea */
+}
+
+.dropdown-menu a:hover {
+  background-color: #e0e7ef;
+  color: #007bff;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  nav a {
+    padding: 0.5rem 1rem;
+    display: block;
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    padding: 0;
+    opacity: 1;
+    visibility: visible;
+    min-width: 100%; /* Alinea el submenú al ancho completo */
+  }
+
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
+
+  .logout-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  border-radius: 4px;
+  display: flex;
+  align-items: center; /* Para alinear el ícono y el texto */
+}
+
+nav a .material-icons {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  font-size: 20px;
+}

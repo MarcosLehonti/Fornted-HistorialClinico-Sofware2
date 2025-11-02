@@ -1,0 +1,19 @@
+<!-- src/app/components/perfil/perfil.component.html -->
+<app-menu></app-menu>
+<div class="perfil-container">
+    <h2>Perfil de Usuario</h2>
+    <form [formGroup]="perfilForm" (ngSubmit)="onActualizarPerfil()">
+      <div class="form-group">
+        <label for="username">Nombre de usuario</label>
+        <input id="username" formControlName="username" type="text" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Correo Electrónico</label>
+        <input id="email" formControlName="email" type="email" required />
+      </div>
+      <button type="submit">Actualizar Perfil</button>
+      <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
+      <div *ngIf="mensajeError" class="error-message">{{ mensajeError }}</div>
+    </form>
+  </div>
+  

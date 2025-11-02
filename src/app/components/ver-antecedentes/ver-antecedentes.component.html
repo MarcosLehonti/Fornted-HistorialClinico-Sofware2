@@ -1,0 +1,40 @@
+<app-menu></app-menu>
+<div class="container">
+    <h2>Ver Antecedentes</h2>
+  
+    <!-- Selección de API (Por Usuario o Paciente) -->
+    <div class="selection-bar">
+      <label>
+        <input
+          type="radio"
+          name="filtro"
+          value="usuario"
+          [(ngModel)]="mostrarPor"
+          (change)="cargarAntecedentes()"
+        />
+        Ver por Usuario
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="filtro"
+          value="paciente"
+          [(ngModel)]="mostrarPor"
+          (change)="cargarAntecedentes()"
+        />
+        Ver por Paciente
+      </label>
+    </div>
+  
+    <!-- Mostrar Antecedentes en Tarjetas -->
+    <div class="antecedentes-cards">
+      <div *ngFor="let antecedente of antecedentes" class="card">
+        <h3>Especialidad: {{ antecedente.especialidad.nombre }}</h3>
+        <p><strong>Descripción:</strong> {{ antecedente.descripcion }}</p>
+        <p><strong>Fecha:</strong> {{ antecedente.fecha }}</p>
+        <p><strong>Médico:</strong> {{ antecedente.usuario.username }}</p>
+        <p><strong>Paciente:</strong> {{ antecedente.paciente.username }}</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,77 @@
+/* src/app/medicos/medicos-list.component.css */
+
+.medico-list {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+}
+
+.medico-list h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+thead th {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+tbody td {
+    padding: 0.75rem;
+    border-top: 1px solid #ddd;
+    color: #333;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .medico-list {
+        padding: 1.5rem;
+    }
+  
+    h1 {
+        font-size: 1.5rem;
+    }
+  
+    table, th, td {
+        font-size: 0.9rem;
+    }
+  
+    button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}

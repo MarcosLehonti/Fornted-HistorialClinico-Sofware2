@@ -1,0 +1,32 @@
+<app-menu></app-menu>
+<div class="card-container">
+    <!-- Tabla de Usuarios -->
+    <div class="card">
+      <h2>Lista de Usuarios</h2>
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuarios">
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>
+              <button class="btn-ver" (click)="verHistorialClinico(usuario.id)">Ver Historial Clínico</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Vista del Historial Clínico -->
+    <div class="card" *ngIf="pacienteSeleccionado">
+      <h2>Historial Clínico</h2>
+      <app-historial-clinico [pacienteId]="pacienteSeleccionado"></app-historial-clinico>
+    </div>
+  </div>
+  

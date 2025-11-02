@@ -1,0 +1,21 @@
+<!-- src/app/components/listar-triajes/listar-triajes.component.html -->
+<app-menu></app-menu>
+<div class="triajes-container">
+    <h2>Lista de Triajes</h2>
+    <div class="triaje-card" *ngFor="let triaje of triajes">
+      <h3>Paciente: {{ triaje.nombrePaciente }}</h3>
+      <p><strong>Enfermera(o):</strong> {{ triaje.nombreEnfermera }}</p>
+      <p><strong>Temperatura:</strong> {{ triaje.temperatura }} °C</p>
+      <p><strong>Fecha:</strong> {{ triaje.fecha }}</p>
+      <p><strong>Hora:</strong> {{ triaje.hora }}</p>
+      <p><strong>Frecuencia Cardiaca:</strong> {{ triaje.frecuenciaCardiaca }} bpm</p>
+      <p><strong>Frecuencia Respiratoria:</strong> {{ triaje.frecuenciaRespiratoria }} rpm</p>
+      <p><strong>Saturación de Oxígeno:</strong> {{ triaje.saturacionOxigeno }}%</p>
+      <p><strong>Peso:</strong> {{ triaje.peso }} kg</p>
+      <p><strong>Estatura:</strong> {{ triaje.estatura }} cm</p>
+      <p><strong>Alergias:</strong> {{ triaje.alergias }}</p>
+      <p><strong>Enfermedades Crónicas:</strong> {{ triaje.enfermedadesCronicas }}</p>
+      <p><strong>Motivo de Consulta:</strong> {{ triaje.motivoConsulta }}</p>
+    </div>
+  </div>
+  

@@ -1,0 +1,63 @@
+<!-- <app-menu></app-menu>
+<div class="medico-list">
+    <h1>Médicos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medico of medicos">
+                <td>{{ medico.username }}</td>
+                <td>{{ medico.email }}</td>
+                <td><button>Ver Perfil</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+
+<app-menu></app-menu>
+<div class="medico-list">
+    <h1>Médicos</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Especialidades</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let medico of medicos">
+                <td>{{ medico.username }}</td>
+                <td>{{ medico.email }}</td>
+                <td>
+                    <ul>
+                        <li *ngFor="let especialidad of medico.especialidades">{{ especialidad.nombre }}</li>
+                    </ul>
+                </td>
+                <td>
+                    <button (click)="abrirFormularioEspecialidad(medico)">Agregar Especialidades</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Formulario modal para agregar especialidades -->
+    <div *ngIf="medicoSeleccionado">
+        <h3>Agregar Especialidades a {{ medicoSeleccionado.username }}</h3>
+        <div *ngFor="let especialidad of especialidades">
+            <input 
+                type="checkbox" 
+                [value]="especialidad.id" 
+                (change)="onEspecialidadChange($event)" 
+            />
+            {{ especialidad.nombre }}
+        </div>
+        <button (click)="asignarEspecialidades()">Asignar</button>
+    </div>
+</div>

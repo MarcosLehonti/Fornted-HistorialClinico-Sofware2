@@ -1,0 +1,41 @@
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Roboto', sans-serif;
+
+  }
+
+  h2{
+    font-family: 'Roboto', sans-serif;
+    text-align: center; /* Centra el texto */
+
+
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #415f80; /* Azul oscuro */
+    color: white;
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #E3F2FD; /* Azul celeste claro para filas pares */
+  }
+  
+  tr:nth-child(odd) {
+    background-color: #BBDEFB; /* Azul celeste medio para filas impares */
+  }
+  
+  td {
+    color: #333;
+    font-family: 'Roboto', sans-serif;
+
+  }
+  
