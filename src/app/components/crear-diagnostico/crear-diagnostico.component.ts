@@ -1,96 +1,91 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../services/user.service';
-import { DiagnosticoService } from '../../services/diagnostico.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
+import { UsuarioGraphQLService } from '../../core/services/graphql/usuario-graphql.service';
+import { DiagnosticoGraphQLService } from '../../core/services/graphql/diagnostico-graphql.service';
 
 @Component({
   standalone: true,
   selector: 'app-crear-diagnostico',
   templateUrl: './crear-diagnostico.component.html',
   styleUrls: ['./crear-diagnostico.component.css'],
-  imports: [CommonModule, FormsModule,MenuComponent]
+  imports: [CommonModule, FormsModule, MenuComponent]
 })
 export class CrearDiagnosticoComponent implements OnInit {
   usuarios: any[] = [];
   pacienteSeleccionado: any = null;
+  isLoading: boolean = false;
 
   // Variables para el formulario de diagnóstico
   descripcion: string = '';
   fecha: string = '';
-  especialidadId: number | null = null;
-  tratamiento: string ='';
+  especialidadId: string = '';
+  tratamiento: string = '';
 
   constructor(
-    private usuarioService: UsuarioService,
-    private diagnosticoService: DiagnosticoService
+    private usuarioService: UsuarioGraphQLService,
+    private diagnosticoService: DiagnosticoGraphQLService
   ) {}
 
   ngOnInit(): void {
     this.obtenerUsuarios();
   }
 
-  // Obtener todos los usuarios para seleccionar un paciente
+  // Obtener todos los usuarios para seleccionar un paciente con GraphQL
   obtenerUsuarios(): void {
-    this.usuarioService.obtenerUsuarios().subscribe(
-      (data) => {
-        this.usuarios = data.usuarios; // Ajuste para extraer `data.usuarios`
+    this.usuarioService.getUsuarios().subscribe({
+      next: (data) => {
+        this.usuarios = data;
+        console.log('✅ Usuarios obtenidos con GraphQL:', this.usuarios);
       },
-      (error) => {
-        console.error('Error al obtener usuarios:', error);
+      error: (error) => {
+        console.error('❌ Error al obtener usuarios:', error);
       }
-    );
+    });
   }
 
   seleccionarPaciente(usuario: any): void {
     this.pacienteSeleccionado = usuario;
   }
 
-  // Obtener ID del médico logueado
-  getMedicoId(): number | null {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const payloadBase64 = token.split('.')[1];
-        const decodedPayload = JSON.parse(atob(payloadBase64));
-        return decodedPayload.usuarioId || null;
-      } catch (error) {
-        console.error('Error al decodificar el token:', error);
-        return null;
-      }
-    }
-    return null;
+  // Obtener ID del médico logueado desde localStorage
+  getMedicoId(): string | null {
+    return localStorage.getItem('usuarioId');
   }
 
   guardarDiagnostico(): void {
-    if (this.pacienteSeleccionado && this.getMedicoId()) {
+    const medicoId = this.getMedicoId();
+    
+    if (this.pacienteSeleccionado && medicoId) {
+      this.isLoading = true;
+      
       const diagnosticoData = {
-        medicoId: this.getMedicoId(),
+        medicoId: medicoId,
         pacienteId: this.pacienteSeleccionado.id,
         descripcion: this.descripcion,
-        fecha: this.fecha,
         especialidadId: this.especialidadId,
         tratamiento: this.tratamiento
       };
-      console.log('Datos a enviar:', diagnosticoData); // Imprime los datos en la consola
+      
+      console.log('📤 Enviando diagnóstico con GraphQL:', diagnosticoData);
 
-
-      this.diagnosticoService.crearDiagnostico(diagnosticoData).subscribe(
-        (response) => {
-          console.log('Diagnóstico creado exitosamente:', response);
-          alert('Diagnóstico guardado exitosamente');
-          // Limpiar el formulario después de guardar
+      this.diagnosticoService.crearDiagnostico(diagnosticoData).subscribe({
+        next: (response) => {
+          console.log('✅ Diagnóstico creado exitosamente (email enviado al paciente):', response);
+          alert('✅ Diagnóstico guardado exitosamente. Se ha enviado una notificación al paciente.');
           this.pacienteSeleccionado = null;
           this.resetFormulario();
+          this.isLoading = false;
         },
-        (error) => {
-          console.error('Error al guardar diagnóstico:', error);
-          alert('Error al guardar el diagnóstico');
+        error: (error) => {
+          console.error('❌ Error al guardar diagnóstico:', error);
+          alert('❌ Error al guardar el diagnóstico: ' + error.message);
+          this.isLoading = false;
         }
-      );
+      });
     } else {
-      alert('Seleccione un paciente y asegúrese de estar logueado.');
+      alert('⚠️ Seleccione un paciente y asegúrese de estar logueado.');
     }
   }
 
@@ -98,7 +93,7 @@ export class CrearDiagnosticoComponent implements OnInit {
   resetFormulario(): void {
     this.descripcion = '';
     this.fecha = '';
-    this.especialidadId = null;
+    this.especialidadId = '';
     this.tratamiento = '';
   }
 }

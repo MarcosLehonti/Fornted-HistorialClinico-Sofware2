@@ -1,25 +1,39 @@
-// src/app/components/horario-table/horario-table.component.ts
+// src/app/components/crear-horario/crear-horario.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HorarioService, Horario } from '../../services/horario.service';
+import { FormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
+import { HorarioGraphQLService, Horario } from '../../core/services/graphql/horario-graphql.service';
 
 @Component({
   selector: 'app-crear-horario',
   standalone: true,
-  imports: [CommonModule, MenuComponent],
+  imports: [CommonModule, FormsModule, MenuComponent],
   templateUrl: './crear-horario.component.html',
   styleUrls: ['./crear-horario.component.css']
 })
 export class CrearHorarioComponent implements OnInit {
   horarios: Horario[] = [];
+  isLoading: boolean = false;
 
-  constructor(private horarioService: HorarioService) {}
+  constructor(private horarioGraphQLService: HorarioGraphQLService) {}
 
   ngOnInit(): void {
-    this.horarioService.obtenerHorarios().subscribe(
-      (data) => (this.horarios = data),
-      (error) => console.error('Error al obtener los horarios', error)
-    );
+    this.cargarHorarios();
+  }
+
+  cargarHorarios(): void {
+    this.isLoading = true;
+    this.horarioGraphQLService.getHorarios().subscribe({
+      next: (data) => {
+        this.horarios = data;
+        this.isLoading = false;
+        console.log('✅ Horarios cargados con GraphQL:', data);
+      },
+      error: (error) => {
+        console.error('❌ Error al obtener los horarios', error);
+        this.isLoading = false;
+      }
+    });
   }
 }

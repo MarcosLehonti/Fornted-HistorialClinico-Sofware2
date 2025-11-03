@@ -1,43 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../api.service';
-import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { MenuComponent } from '../menu/menu.component';
+import { CitaGraphQLService } from '../../core/services/graphql/cita-graphql.service';
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   standalone: true,
   selector: 'app-citas-usuario',
   templateUrl: './citas-usuario.component.html',
   styleUrls: ['./citas-usuario.component.css'],
-  providers: [ApiService],
   imports: [CommonModule, MenuComponent]
 })
 export class CitasUsuarioComponent implements OnInit {
   citas: any[] = []; // Array para almacenar las citas
   fechaActual: string = ''; // Variable para almacenar la fecha actual
+  isLoading: boolean = false;
 
-  constructor(private apiService: ApiService, private authService: AuthService) {}
+  constructor(
+    private citaService: CitaGraphQLService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
     this.cargarCitas();
     this.fechaActual = this.obtenerFechaActual(); // Obtener la fecha actual al cargar el componente
   }
 
-  // Método para cargar las citas usando el ID del usuario logueado
+  // Método para cargar las citas usando el ID del usuario logueado con GraphQL
   cargarCitas(): void {
-    const usuarioId = this.authService.getUsuarioId(); // Obtener el ID del usuario logueado
+    const usuarioId = this.storage.getItem('usuarioId'); // Obtener el ID del usuario logueado
     if (usuarioId) {
-      this.apiService.obtenerCitasPorUsuario(usuarioId).subscribe(
-        (data) => {
+      this.isLoading = true;
+      this.citaService.getCitasPorUsuario(usuarioId).subscribe({
+        next: (data) => {
           this.citas = data;
-          console.log('Citas cargadas:', this.citas); // Verificar en la consola
+          this.isLoading = false;
+          console.log('✅ Citas cargadas con GraphQL:', this.citas);
         },
-        (error) => {
-          console.error('Error al cargar citas:', error);
+        error: (error) => {
+          console.error('❌ Error al cargar citas:', error);
+          this.isLoading = false;
         }
-      );
+      });
     } else {
-      console.error('Usuario ID no encontrado');
+      console.log('⚠️ Usuario ID no encontrado');
     }
   }
 

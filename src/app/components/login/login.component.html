@@ -2,12 +2,12 @@
   <h2>Iniciar Sesión</h2>
   <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div class="form-group">
-      <label for="username">Nombre de usuario</label>
+      <label for="email">Email</label>
       <input
-        id="username"
-        formControlName="username"
-        type="text"
-        placeholder="Ingresa tu usuario"
+        id="email"
+        formControlName="email"
+        type="email"
+        placeholder="Ingresa tu email"
         required
       />
     </div>
@@ -21,8 +21,10 @@
         required
       />
     </div>
-    <button type="submit">Ingresar</button>
-    <button (click)="irARegistro()">Registrarse</button>
+    <button type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Iniciando sesión...' : 'Ingresar' }}
+    </button>
+    <button type="button" (click)="irARegistro()" [disabled]="isLoading">Registrarse</button>
     <div *ngIf="mensajeError" class="error-message">{{ mensajeError }}</div>    
   </form>
 </div> 

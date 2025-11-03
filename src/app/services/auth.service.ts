@@ -25,28 +25,43 @@ export class AuthService {
   }
 
   saveToken(token: string) {
-    localStorage.setItem('token', token);
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('token', token);
+    }
   }
 
   saveRol(rol: string) {
-    localStorage.setItem('rol', rol);
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.setItem('rol', rol);
+    }
   }
 
   getRol(): string | null {
-    return localStorage.getItem('rol');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      return localStorage.getItem('rol');
+    }
+    return null;
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('rol'); // Elimina el rol del localStorage al cerrar sesión
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      localStorage.removeItem('token');
+      localStorage.removeItem('rol');
+    }
     this.router.navigate(['/login']);
   }
 
   getUsuarioId(): number | null {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return null;
+    }
     const token = localStorage.getItem('token');
     if (token) {
       try {
@@ -62,6 +77,9 @@ export class AuthService {
   }
 
   getRolFromToken(): string | null {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return null;
+    }
     const token = localStorage.getItem('token');
     if (token) {
       try {
@@ -78,6 +96,9 @@ export class AuthService {
   
 
   getUsuarioNombre(): string | null {
+    if (typeof window === 'undefined' || typeof localStorage === 'undefined') {
+      return null;
+    }
     const token = localStorage.getItem('token');
     if (token) {
       try {

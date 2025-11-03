@@ -1,24 +1,35 @@
-<!-- src/app/components/horario-table/horario-table.component.html -->
+<!-- src/app/components/crear-horario/crear-horario.component.html -->
 <app-menu></app-menu>
 <div class="container">
   <h2>Horarios</h2>
-  <table *ngIf="horarios.length > 0; else noData" class="table">
+
+  <div *ngIf="isLoading" class="loading">
+    <p>⏳ Cargando horarios...</p>
+  </div>
+
+  <table *ngIf="horarios.length > 0 && !isLoading; else noData" class="table">
     <thead>
       <tr>
         <th>ID</th>
-        <th>Hora</th>
-        
+        <th>Fecha</th>
+        <th>Hora Inicio</th>
+        <th>Hora Fin</th>
+        <th>Disponible</th>
+        <th>Especialidad</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let horario of horarios">
         <td>{{ horario.id }}</td>
-        <td>{{ horario.timeSlot }}</td>
-        
+        <td>{{ horario.fecha || 'N/A' }}</td>
+        <td>{{ horario.horaInicio }}</td>
+        <td>{{ horario.horaFin }}</td>
+        <td>{{ horario.disponible ? '✅ Sí' : '❌ No' }}</td>
+        <td>{{ horario.especialidad?.nombre || 'Sin especialidad' }}</td>
       </tr>
     </tbody>
   </table>
   <ng-template #noData>
-    <p class="no-data">No hay horarios disponibles.</p>
+    <p class="no-data" *ngIf="!isLoading">⚠️ No hay horarios disponibles.</p>
   </ng-template>
 </div>

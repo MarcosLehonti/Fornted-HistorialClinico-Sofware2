@@ -59,26 +59,6 @@ export const routes: Routes = [
   { path: 'vermihistorialclinico', component: PacienteDetalleComponent},
   { path: 'bitacora', component: AdminBitacoraComponent},
   { path: 'verhistoriasclinicas', component: UsuariosListaComponent},
-
- 
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
   
   // // Redirección a /login por defecto si no se encuentra la ruta
   // { path: '', redirectTo: '/login', pathMatch: 'full' },

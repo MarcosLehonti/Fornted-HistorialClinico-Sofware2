@@ -1,21 +1,23 @@
 // src/app/components/crear-triaje/crear-triaje.component.ts
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
+import { UsuarioGraphQLService } from '../../core/services/graphql/usuario-graphql.service';
+import { TriajeGraphQLService, TriajeInput } from '../../core/services/graphql/triaje-graphql.service';
+import { StorageService } from '../../core/services/storage.service';
 
 @Component({
   standalone: true,
   selector: 'app-crear-triaje',
   templateUrl: './crear-triaje.component.html',
   styleUrls: ['./crear-triaje.component.css'],
-  providers: [UsuarioService],
-  imports: [CommonModule, FormsModule,MenuComponent]
+  imports: [CommonModule, FormsModule, MenuComponent]
 })
 export class CrearTriajeComponent implements OnInit {
   usuarios: any[] = [];
   pacienteSeleccionado: any = null;
+  isLoading: boolean = false;
 
   // Variables para el formulario de triaje
   temperatura: number = 0;
@@ -29,20 +31,31 @@ export class CrearTriajeComponent implements OnInit {
   alergias: string = '';
   enfermedadesCronicas: string = '';
   motivoConsulta: string = '';
+  presionArterial: string = '';
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(
+    private usuarioGraphQLService: UsuarioGraphQLService,
+    private triajeGraphQLService: TriajeGraphQLService,
+    private storage: StorageService
+  ) {}
 
   ngOnInit(): void {
-    // Cargar todos los usuarios al iniciar
-    this.usuarioService.obtenerUsuarios().subscribe(
-      (data) => {
-        // Asegúrate de acceder a `data.usuarios` si la estructura lo requiere.
-        this.usuarios = Array.isArray(data) ? data : data.usuarios || [];
+    this.cargarUsuarios();
+  }
+
+  cargarUsuarios(): void {
+    this.isLoading = true;
+    this.usuarioGraphQLService.getUsuarios().subscribe({
+      next: (data) => {
+        this.usuarios = data;
+        this.isLoading = false;
+        console.log('✅ Usuarios cargados con GraphQL:', this.usuarios);
       },
-      (error) => {
-        console.error('Error al obtener usuarios:', error);
+      error: (error) => {
+        console.error('❌ Error al cargar usuarios:', error);
+        this.isLoading = false;
       }
-    );
+    });
   }
 
   seleccionarPaciente(usuario: any): void {
@@ -51,42 +64,44 @@ export class CrearTriajeComponent implements OnInit {
   }
 
   guardarTriaje(): void {
-    if (this.pacienteSeleccionado) {
-      const triajeData = {
-        pacienteId: this.pacienteSeleccionado.id,
-        temperatura: this.temperatura,
-        fecha: this.fecha,
-        hora: this.hora,
-        frecuenciaCardiaca: this.frecuenciaCardiaca,
-        frecuenciaRespiratoria: this.frecuenciaRespiratoria,
-        saturacionOxigeno: this.saturacionOxigeno,
-        peso: this.peso,
-        estatura: this.estatura,
-        alergias: this.alergias,
-        enfermedadesCronicas: this.enfermedadesCronicas,
-        motivoConsulta: this.motivoConsulta,
-        enfermeraId: this.getEnfermeraId()
-      };
-
-      this.usuarioService.crearTriaje(triajeData).subscribe(
-        (response) => {
-          console.log('Triaje creado exitosamente:', response);
-          alert('Triaje guardado exitosamente');
-          // Limpia el formulario después de guardar
-          this.pacienteSeleccionado = null;
-          this.resetFormulario();
-        },
-        (error) => {
-          console.error('Error al guardar triaje:', error);
-          alert('Error al guardar el triaje');
-        }
-      );
+    if (!this.pacienteSeleccionado) {
+      alert('Por favor selecciona un paciente');
+      return;
     }
+     
+    const triajeInput: TriajeInput = {
+      pacienteId: this.pacienteSeleccionado.id,
+      temperatura: this.temperatura,
+      fecha: `${this.fecha}T${this.hora}:00`,
+      presionArterial: this.presionArterial,
+      frecuenciaCardiaca: this.frecuenciaCardiaca,
+      frecuenciaRespiratoria: this.frecuenciaRespiratoria,
+      saturacionOxigeno: this.saturacionOxigeno,
+      peso: this.peso,
+      altura: this.estatura,
+      observaciones: `Alergias: ${this.alergias}. Enfermedades crónicas: ${this.enfermedadesCronicas}. Motivo: ${this.motivoConsulta}`
+    };
+
+    this.isLoading = true;
+    this.triajeGraphQLService.createTriaje(triajeInput).subscribe({
+      next: (response) => {
+        console.log('✅ Triaje creado con GraphQL:', response);
+        alert('Triaje guardado exitosamente');
+        this.pacienteSeleccionado = null;
+        this.resetFormulario();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('❌ Error al guardar triaje:', error);
+        alert('Error al guardar el triaje');
+        this.isLoading = false;
+      }
+    });
   }
 
   // Obtiene el ID de la enfermera logueada
-  getEnfermeraId(): number | null {
-    const token = localStorage.getItem('token');
+  getEnfermeraId(): string | null {
+    const token = this.storage.getItem('token');
     if (token) {
       try {
         const payloadBase64 = token.split('.')[1];
