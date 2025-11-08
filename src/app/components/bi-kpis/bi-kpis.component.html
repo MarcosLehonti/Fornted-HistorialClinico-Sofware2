@@ -8,20 +8,20 @@
 
     <!-- Error State -->
     <div *ngIf="error" class="error-state">
-      <p>⚠️ Error: {{ error }}</p>
+      <p><span class="material-icons error-icon">error</span> Error: {{ error }}</p>
     </div>
 
     <!-- Main Content -->
     <div *ngIf="!loading && !error" class="content">
       <div class="page-header">
-        <h1>📊 Business Intelligence & KPIs</h1>
+        <h1><span class="material-icons header-icon">insights</span> Business Intelligence & KPIs</h1>
         <p class="subtitle">Panel de análisis y métricas del sistema</p>
       </div>
 
       <!-- KPIs Section - 3 Cards Horizontal -->
       <div class="kpis-section">
         <div class="kpi-card">
-          <div class="kpi-icon">📈</div>
+          <div class="kpi-icon"><span class="material-icons">trending_up</span></div>
           <div class="kpi-content">
             <h3>Tasa de Crecimiento</h3>
             <div *ngIf="kpiCrecimiento; else noKpi">
@@ -39,7 +39,7 @@
         </div>
 
         <div class="kpi-card">
-          <div class="kpi-icon">✅</div>
+          <div class="kpi-icon"><span class="material-icons">check_circle</span></div>
           <div class="kpi-content">
             <h3>Asistencia</h3>
             <div *ngIf="kpiAsistencia; else noAsistencia">
@@ -59,7 +59,7 @@
         </div>
 
         <div class="kpi-card">
-          <div class="kpi-icon">📅</div>
+          <div class="kpi-icon"><span class="material-icons">event</span></div>
           <div class="kpi-content">
             <h3>Total Citas</h3>
             <div class="kpi-value">{{ totalCitas }}</div>
@@ -72,17 +72,17 @@
 
       <!-- BI Charts Section -->
       <div class="charts-section">
-        <h2 class="section-title">📊 Análisis Visual</h2>
+        <h2 class="section-title"><span class="material-icons section-icon">bar_chart</span> Análisis Visual</h2>
 
         <!-- Row 1: Bar Chart + Line Chart -->
         <div class="charts-row">
           <div class="chart-card">
-            <h3>Citas por Especialidad</h3>
+            <h3><span class="material-icons chart-icon">bar_chart</span> Citas por Especialidad</h3>
             <div id="chartEspecialidad" class="chart-container"></div>
           </div>
 
           <div class="chart-card">
-            <h3>Tendencia Temporal (Mes)</h3>
+            <h3><span class="material-icons chart-icon">show_chart</span> Tendencia Temporal (Mes)</h3>
             <div id="chartTemporal" class="chart-container"></div>
           </div>
         </div>
@@ -90,12 +90,12 @@
         <!-- Row 2: Heatmap + User Growth -->
         <div class="charts-row">
           <div class="chart-card">
-            <h3>Mapa de Calor - Horarios Demandados</h3>
+            <h3><span class="material-icons chart-icon">grid_on</span> Mapa de Calor - Horarios Demandados</h3>
             <div id="chartHeatmap" class="chart-container"></div>
           </div>
 
           <div class="chart-card">
-            <h3>Crecimiento de Usuarios</h3>
+            <h3><span class="material-icons chart-icon">trending_up</span> Crecimiento de Usuarios</h3>
             <div id="chartUsuarios" class="chart-container"></div>
           </div>
         </div>
@@ -103,7 +103,7 @@
         <!-- Row 3: Gauge Chart -->
         <div class="charts-row">
           <div class="chart-card full-width">
-            <h3>Indicador de Asistencia</h3>
+            <h3><span class="material-icons chart-icon">speed</span> Indicador de Asistencia</h3>
             <div id="chartGauge" class="chart-container"></div>
           </div>
         </div>

@@ -46,6 +46,18 @@
   max-width: 600px;
 }
 
+.error-state p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.error-icon {
+  font-size: 2rem !important;
+  color: #f44336;
+}
+
 /* ===== HEADER ===== */
 .page-header {
   text-align: center;
@@ -58,6 +70,21 @@
   color: #2c3e50;
   margin: 0;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.header-icon {
+  font-size: 3rem !important;
+  color: #3498db;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 .subtitle {
@@ -93,8 +120,36 @@
 }
 
 .kpi-icon {
-  font-size: 3rem;
   flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+}
+
+.kpi-icon .material-icons {
+  font-size: 2.5rem !important;
+  color: white;
+}
+
+/* Colores específicos para cada KPI */
+.kpi-card:nth-child(1) .kpi-icon {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  box-shadow: 0 4px 10px rgba(245, 87, 108, 0.3);
+}
+
+.kpi-card:nth-child(2) .kpi-icon {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 4px 10px rgba(79, 172, 254, 0.3);
+}
+
+.kpi-card:nth-child(3) .kpi-icon {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  box-shadow: 0 4px 10px rgba(67, 233, 123, 0.3);
 }
 
 .kpi-content {
@@ -154,6 +209,15 @@
   margin-bottom: 1.5rem;
   font-weight: 600;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.section-icon {
+  font-size: 2rem !important;
+  color: #3498db;
 }
 
 .charts-row {
@@ -187,6 +251,14 @@
   font-weight: 600;
   border-bottom: 2px solid #3498db;
   padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-icon {
+  font-size: 1.5rem !important;
+  color: #3498db;
 }
 
 .chart-container {
