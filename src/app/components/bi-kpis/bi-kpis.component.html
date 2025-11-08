@@ -1,0 +1,112 @@
+<app-menu></app-menu>
+<div class="bi-kpis-container">
+    <!-- Loading State -->
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando datos de BI y KPIs...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-state">
+      <p>⚠️ Error: {{ error }}</p>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="!loading && !error" class="content">
+      <div class="page-header">
+        <h1>📊 Business Intelligence & KPIs</h1>
+        <p class="subtitle">Panel de análisis y métricas del sistema</p>
+      </div>
+
+      <!-- KPIs Section - 3 Cards Horizontal -->
+      <div class="kpis-section">
+        <div class="kpi-card">
+          <div class="kpi-icon">📈</div>
+          <div class="kpi-content">
+            <h3>Tasa de Crecimiento</h3>
+            <div *ngIf="kpiCrecimiento; else noKpi">
+              <div class="kpi-value">{{ kpiCrecimiento!.growth_percent }}%</div>
+              <div class="kpi-details">
+                <span>{{ kpiCrecimiento!.current_month }}: {{ kpiCrecimiento!.current_total }} citas</span>
+                <span>{{ kpiCrecimiento!.previous_month }}: {{ kpiCrecimiento!.previous_total }} citas</span>
+              </div>
+            </div>
+            <ng-template #noKpi>
+              <div class="kpi-value">-</div>
+              <div class="kpi-details">Sin datos</div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">✅</div>
+          <div class="kpi-content">
+            <h3>Asistencia</h3>
+            <div *ngIf="kpiAsistencia; else noAsistencia">
+              <div class="kpi-value">{{ kpiAsistencia!.percent }}%</div>
+              <div class="kpi-details">
+                <span>{{ kpiAsistencia!.attended }} de {{ kpiAsistencia!.total }} citas</span>
+              </div>
+              <div class="kpi-progress">
+                <div class="kpi-progress-bar" [style.width.%]="kpiAsistencia!.percent"></div>
+              </div>
+            </div>
+            <ng-template #noAsistencia>
+              <div class="kpi-value">-</div>
+              <div class="kpi-details">Sin datos</div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">📅</div>
+          <div class="kpi-content">
+            <h3>Total Citas</h3>
+            <div class="kpi-value">{{ totalCitas }}</div>
+            <div class="kpi-details">
+              <span>Citas programadas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BI Charts Section -->
+      <div class="charts-section">
+        <h2 class="section-title">📊 Análisis Visual</h2>
+
+        <!-- Row 1: Bar Chart + Line Chart -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3>Citas por Especialidad</h3>
+            <div id="chartEspecialidad" class="chart-container"></div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Tendencia Temporal (Mes)</h3>
+            <div id="chartTemporal" class="chart-container"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Heatmap + User Growth -->
+        <div class="charts-row">
+          <div class="chart-card">
+            <h3>Mapa de Calor - Horarios Demandados</h3>
+            <div id="chartHeatmap" class="chart-container"></div>
+          </div>
+
+          <div class="chart-card">
+            <h3>Crecimiento de Usuarios</h3>
+            <div id="chartUsuarios" class="chart-container"></div>
+          </div>
+        </div>
+
+        <!-- Row 3: Gauge Chart -->
+        <div class="charts-row">
+          <div class="chart-card full-width">
+            <h3>Indicador de Asistencia</h3>
+            <div id="chartGauge" class="chart-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

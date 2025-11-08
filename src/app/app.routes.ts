@@ -59,6 +59,7 @@ export const routes: Routes = [
   { path: 'vermihistorialclinico', component: PacienteDetalleComponent},
   { path: 'bitacora', component: AdminBitacoraComponent},
   { path: 'verhistoriasclinicas', component: UsuariosListaComponent},
+  { path: 'bi-kpis', loadComponent: () => import('./components/bi-kpis/bi-kpis.component').then(m => m.BiKpisComponent) },
   
   // // Redirección a /login por defecto si no se encuentra la ruta
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
