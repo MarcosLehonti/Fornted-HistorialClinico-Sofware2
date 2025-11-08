@@ -58,6 +58,7 @@
           </div>
         </div>
 
+        <!-- KPIs comentados - No son verdaderos KPIs
         <div class="kpi-card">
           <div class="kpi-icon"><span class="material-icons">event</span></div>
           <div class="kpi-content">
@@ -66,6 +67,91 @@
             <div class="kpi-details">
               <span>Citas programadas</span>
             </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">calendar_month</span></div>
+          <div class="kpi-content">
+            <h3>Citas del Mes</h3>
+            <div class="kpi-value">{{ citasMesActual }}</div>
+            <div class="kpi-details">
+              <span>Mes actual</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">today</span></div>
+          <div class="kpi-content">
+            <h3>Citas de Hoy</h3>
+            <div class="kpi-value">{{ citasHoy }}</div>
+            <div class="kpi-details">
+              <span>Día actual</span>
+            </div>
+          </div>
+        </div>
+        -->
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">medical_services</span></div>
+          <div class="kpi-content">
+            <h3>Especialidad Top</h3>
+            <div class="kpi-value">{{ porcentajeEspecialidadTop }}%</div>
+            <div class="kpi-details">
+              <span>{{ especialidadMasPedida || 'Sin datos' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">pie_chart</span></div>
+          <div class="kpi-content">
+            <h3>Más Solicitada</h3>
+            <div class="kpi-value">{{ porcentajeEspecialidadTop }}%</div>
+            <div class="kpi-details">
+              <span>{{ especialidadMasPedida || 'Sin datos' }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">schedule</span></div>
+          <div class="kpi-content">
+            <h3>Ocupación Horarios</h3>
+            <div *ngIf="kpiOcupacion; else noOcupacion">
+              <div class="kpi-value">{{ kpiOcupacion!.percent }}%</div>
+              <div class="kpi-details">
+                <span>{{ kpiOcupacion!.ocupados }} de {{ kpiOcupacion!.total }} horarios</span>
+              </div>
+              <div class="kpi-progress">
+                <div class="kpi-progress-bar" [style.width.%]="kpiOcupacion!.percent"></div>
+              </div>
+            </div>
+            <ng-template #noOcupacion>
+              <div class="kpi-value">-</div>
+              <div class="kpi-details">Sin datos</div>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon"><span class="material-icons">cancel</span></div>
+          <div class="kpi-content">
+            <h3>Tasa Cancelación</h3>
+            <div *ngIf="kpiCancelacion; else noCancelacion">
+              <div class="kpi-value">{{ kpiCancelacion!.percent }}%</div>
+              <div class="kpi-details">
+                <span>{{ kpiCancelacion!.canceladas }} de {{ kpiCancelacion!.total }} citas</span>
+              </div>
+              <div class="kpi-progress">
+                <div class="kpi-progress-bar kpi-progress-bar-warning" [style.width.%]="kpiCancelacion!.percent"></div>
+              </div>
+            </div>
+            <ng-template #noCancelacion>
+              <div class="kpi-value">-</div>
+              <div class="kpi-details">Sin datos</div>
+            </ng-template>
           </div>
         </div>
       </div>

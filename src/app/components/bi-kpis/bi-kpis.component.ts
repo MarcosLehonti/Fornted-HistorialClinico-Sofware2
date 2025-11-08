@@ -28,7 +28,13 @@ export class BiKpisComponent implements OnInit, AfterViewInit {
   citasPorDia: SerieCitas[] = [];
   kpiCrecimiento: KpiCrecimiento | null = null;
   kpiAsistencia: { percent: number; attended: number; total: number } | null = null;
+  kpiOcupacion: { percent: number; ocupados: number; total: number } | null = null;
+  kpiCancelacion: { percent: number; canceladas: number; total: number } | null = null;
   totalCitas = 0;
+  citasMesActual = 0;
+  citasHoy = 0;
+  especialidadMasPedida = '';
+  porcentajeEspecialidadTop = 0;
 
   private gqlUrl = 'http://localhost:8001/graphql'; // Microservicio BI-KPIS
   private charts: any[] = [];
@@ -44,6 +50,8 @@ export class BiKpisComponent implements OnInit, AfterViewInit {
         this.fetchCitasPorDia(),
         this.fetchKpiCrecimiento(),
         this.fetchKpiAsistencia(),
+        this.fetchKpiOcupacion(),
+        this.fetchKpiCancelacion(),
         this.fetchUsuariosCrecimiento(),
       ]);
       this.calculateTotalCitas();
@@ -65,6 +73,34 @@ export class BiKpisComponent implements OnInit, AfterViewInit {
 
   private calculateTotalCitas() {
     this.totalCitas = this.citasPorMes.reduce((sum, item) => sum + item.total, 0);
+    
+    // Calcular citas del mes actual (formato YYYY-MM)
+    const now = new Date();
+    const currentMonth = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+    const mesActual = this.citasPorMes.find(item => item.period === currentMonth);
+    this.citasMesActual = mesActual ? mesActual.total : 0;
+    
+    // Calcular citas del día de hoy (formato YYYY-MM-DD)
+    const currentDay = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+    const diaHoy = this.citasPorDia.find(item => item.period === currentDay);
+    this.citasHoy = diaHoy ? diaHoy.total : 0;
+    
+    // Calcular especialidad más pedida y su porcentaje
+    if (this.barrasEspecialidad.length > 0) {
+      // Ordenar por total descendente
+      const especialidadesOrdenadas = [...this.barrasEspecialidad].sort((a, b) => b.total - a.total);
+      const topEspecialidad = especialidadesOrdenadas[0];
+      
+      this.especialidadMasPedida = topEspecialidad.especialidad;
+      
+      // Calcular el total de todas las citas por especialidad
+      const totalCitasEspecialidades = this.barrasEspecialidad.reduce((sum, item) => sum + item.total, 0);
+      
+      // Calcular el porcentaje
+      this.porcentajeEspecialidadTop = totalCitasEspecialidades > 0 
+        ? Math.round((topEspecialidad.total / totalCitasEspecialidades) * 100 * 100) / 100 
+        : 0;
+    }
   }
     
 
@@ -128,6 +164,18 @@ export class BiKpisComponent implements OnInit, AfterViewInit {
     const q = `query { kpiAsistencia { percent attended total } }`;
     const data = await this.gql<{ kpiAsistencia: { percent: number; attended: number; total: number } }>(q);
     this.kpiAsistencia = data.kpiAsistencia;
+  }
+
+  private async fetchKpiOcupacion() {
+    const q = `query { kpiOcupacionHorarios { percent ocupados total } }`;
+    const data = await this.gql<{ kpiOcupacionHorarios: { percent: number; ocupados: number; total: number } }>(q);
+    this.kpiOcupacion = data.kpiOcupacionHorarios;
+  }
+
+  private async fetchKpiCancelacion() {
+    const q = `query { kpiTasaCancelacion { percent canceladas total } }`;
+    const data = await this.gql<{ kpiTasaCancelacion: { percent: number; canceladas: number; total: number } }>(q);
+    this.kpiCancelacion = data.kpiTasaCancelacion;
   }
 
   private async fetchUsuariosCrecimiento() {
