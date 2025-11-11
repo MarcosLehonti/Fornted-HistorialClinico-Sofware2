@@ -2,7 +2,9 @@ import { HttpLink } from 'apollo-angular/http';
 import { ApolloClientOptions, InMemoryCache, ApolloLink } from '@apollo/client/core';
 import { setContext } from '@apollo/client/link/context';
 
-const uri = 'http://localhost:8080/graphql';
+//const uri = 'http://localhost:8080/graphql';
+const uri = 'https://backend-historialclinico-sofware2.onrender.com/graphql';
+
 
 
 export function apolloOptionsFactory(httpLink: HttpLink): ApolloClientOptions<any> {

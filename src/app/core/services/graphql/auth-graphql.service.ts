@@ -33,7 +33,7 @@ export class AuthGraphQLService {
     this.apollo.createNamed('authClient', {
       link: this.httpLink.create({
         //uri: 'http://localhost:4000/graphql',
-        uri:'https://backend-historialclinico-sofware2.onrender.com/graphql',
+        uri:'https://microservicio-firebase.onrender.com/graphql',
       }),
       cache: new InMemoryCache(),
     });
