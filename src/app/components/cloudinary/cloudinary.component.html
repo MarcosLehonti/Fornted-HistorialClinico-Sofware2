@@ -1,0 +1,22 @@
+<app-menu></app-menu>
+
+<div class="container">
+  <h2>📸 Mis Imágenes (Cloudinary)</h2>
+
+  <!-- Subida de archivos -->
+  <div class="upload-section">
+    <input type="file" (change)="onFileChange($event)" />
+    <button (click)="uploadImage()" [disabled]="uploading || !selectedFile">
+      {{ uploading ? 'Subiendo...' : 'Subir Imagen' }}
+    </button>
+  </div>
+
+  <!-- Mostrar galería -->
+  <div class="gallery">
+    <div *ngFor="let file of files" class="card">
+      <img [src]="file.fileUrl" alt="Imagen del paciente" />
+      <p><strong>ID:</strong> {{ file.id }}</p>
+      <p><strong>Fecha:</strong> {{ file.createdAt | date:'short' }}</p>
+    </div>
+  </div>
+</div>

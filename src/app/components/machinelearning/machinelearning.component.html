@@ -1,0 +1,72 @@
+<app-menu></app-menu>
+
+<div class="ml-container">
+  <h2>Machine Learning - Microservicio</h2>
+
+  <div class="buttons">
+    <button (click)="entrenarClusters()" [disabled]="loading">Entrenar Clusters</button>
+    <button (click)="obtenerClusters()" [disabled]="loading">Obtener Clusters</button>
+    <button (click)="entrenarModelo()" [disabled]="loading">Entrenar Machine Learning</button>
+    <button (click)="obtenerTriajesRiesgo()" [disabled]="loading">Obtener Triajes Riesgo</button>
+  </div>
+
+  <p *ngIf="resultado" class="resultado">{{ resultado }}</p>
+
+  <!-- Tabla de clusters -->
+  <div *ngIf="clusters.length">
+    <h3>Clusters</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Triaje</th>
+          <th>Cluster</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of clusters">
+          <td>{{ c.idTriaje }}</td>
+          <td>{{ c.cluster }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Tabla de triajes de riesgo -->
+  <div *ngIf="triajesRiesgo.length">
+    <h3>Triajes por Riesgo</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>ID Triaje</th>
+          <th>Nombre Paciente</th>
+          <th>Temperatura</th>
+          <th>Frec. Cardíaca</th>
+          <th>Frec. Respiratoria</th>
+          <th>Saturación O₂</th>
+          <th>Peso</th>
+          <th>Estatura</th>
+          <th>Alergias</th>
+          <th>Enfermedades Crónicas</th>
+          <th>Motivo Consulta</th>
+          <th>Sufre Infarto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of triajesRiesgo">
+          <td>{{ t.id_triaje }}</td>
+          <td>{{ t.nombre_paciente }}</td>
+          <td>{{ t.temperatura }}</td>
+          <td>{{ t.frecuencia_cardiaca }}</td>
+          <td>{{ t.frecuencia_respiratoria }}</td>
+          <td>{{ t.saturacion_oxigeno }}</td>
+          <td>{{ t.peso }}</td>
+          <td>{{ t.estatura }}</td>
+          <td>{{ t.alergias }}</td>
+          <td>{{ t.enfermedades_cronicas }}</td>
+          <td>{{ t.motivo_consulta }}</td>
+          <td>{{ t.sufre_infarto ? 'Sí' : 'No' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

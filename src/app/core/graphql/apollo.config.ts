@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context';
 
 const uri = 'http://localhost:8080/graphql';
 
+
 export function apolloOptionsFactory(httpLink: HttpLink): ApolloClientOptions<any> {
   // Configurar autenticación JWT
   const auth = setContext((operation, context) => {

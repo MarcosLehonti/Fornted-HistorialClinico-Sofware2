@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+
+<div class="agente-container">
+  <h2 class="title">🩺 Análisis ECG con Agente IA</h2>
+
+  <div class="upload-section">
+    <input type="number" placeholder="🧍 ID Paciente" [(ngModel)]="idPaciente" />
+    <input type="text" placeholder="🖼️ URL o nombre del archivo" [(ngModel)]="archivoImagen" />
+    <button (click)="analizarECG()" class="btn primary">🔍 Analizar ECG</button>
+    <button (click)="verHistorico()" class="btn secondary">📜 Ver Historial</button>
+    <button (click)="entrenarModelo()" [disabled]="entrenando" class="btn accent">
+      {{ entrenando ? '⚙️ Entrenando...' : '🧠 Entrenar Modelo' }}
+    </button>
+  </div>
+
+  <div *ngIf="resultado" class="result-card fade-in">
+    <h3>🧾 Resultado del análisis</h3>
+    <div class="info">
+      <p><strong>Diagnóstico:</strong> {{ resultado.diagnostico }}</p>
+      <p><strong>Nivel de riesgo:</strong> {{ resultado.nivel_riesgo }}</p>
+      <p><strong>Probabilidad:</strong> {{ resultado.probabilidad }}%</p>
+      <p><strong>Modelo:</strong> {{ resultado.modelo_utilizado }}</p>
+    </div>
+  </div>
+
+  <div *ngIf="historico.length > 0" class="historico-section fade-in">
+    <h3>📈 Historial ECG</h3>
+    <div class="gallery">
+      <div *ngFor="let h of historico" class="card hover-card">
+        <img [src]="h.archivo_imagen" alt="ECG" />
+        <p><strong>{{ h.fecha_analisis }}</strong></p>
+        <p>{{ h.diagnostico }} ({{ h.nivel_riesgo }})</p>
+      </div>
+    </div>
+  </div>
+</div>

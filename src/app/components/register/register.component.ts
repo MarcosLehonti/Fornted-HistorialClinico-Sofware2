@@ -41,11 +41,13 @@ export class RegistroComponent {
 
       const { username, email, password } = this.registroForm.value;
 
-      this.authService.registro({ username, email, password })
+      // ✅ Llamar correctamente al servicio con tres parámetros
+      this.authService.registro(username, email, password)
         .subscribe({
           next: (usuario) => {
             console.log('✅ Registro exitoso:', usuario);
-            this.mensajeExito = `¡Registro exitoso! Bienvenido ${usuario.username}`;
+            // ✅ Mostrar mensaje usando 'name' que viene desde el backend
+            this.mensajeExito = `¡Registro exitoso! Bienvenido ${usuario.name}`;
             this.mensajeError = null;
             this.registroForm.reset();
             this.isLoading = false;

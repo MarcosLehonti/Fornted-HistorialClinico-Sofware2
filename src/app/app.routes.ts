@@ -61,6 +61,31 @@ export const routes: Routes = [
   { path: 'verhistoriasclinicas', component: UsuariosListaComponent},
   { path: 'bi-kpis', loadComponent: () => import('./components/bi-kpis/bi-kpis.component').then(m => m.BiKpisComponent) },
   
+
+  {//ruta para la vista de CLOUDINARY
+    path: 'cloudinary',
+    loadComponent: () => import('./components/cloudinary/cloudinary.component').then(m => m.CloudinaryComponent),
+    canActivate: [AuthGuard] // opcional, si quieres que solo usuarios logueados la vean
+  },
+
+
+
+  // ruta para la vista de Machine Learning
+  {
+    path: 'machinelearning',
+    loadComponent: () => import('./components/machinelearning/machinelearning.component').then(m => m.MachineLearningComponent),
+    canActivate: [AuthGuard] // opcional
+  },
+
+
+
+  // ueva vista: Agente (IA ECG)
+  {
+    path: 'agente',
+    loadComponent: () =>
+      import('./components/agente/agente.component').then((m) => m.AgenteComponent),
+    canActivate: [AuthGuard],
+  },
   // // Redirección a /login por defecto si no se encuentra la ruta
   // { path: '', redirectTo: '/login', pathMatch: 'full' },
   
