@@ -32,7 +32,8 @@ export class AuthGraphQLService {
     // ✅ Crear cliente Apollo apuntando al backend (puerto 4000)
     this.apollo.createNamed('authClient', {
       link: this.httpLink.create({
-        uri: 'http://localhost:4000/graphql',
+        //uri: 'http://localhost:4000/graphql',
+        uri:'https://backend-historialclinico-sofware2.onrender.com/graphql',
       }),
       cache: new InMemoryCache(),
     });
